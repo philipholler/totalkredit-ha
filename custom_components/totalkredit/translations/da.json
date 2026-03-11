@@ -1,0 +1,38 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Vælg obligationer",
+        "description": "Vælg de Totalkredit-obligationer du ønsker at følge.",
+        "data": {
+          "selected_bonds": "Obligationer"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Totalkredit er allerede konfigureret.",
+      "cannot_connect": "Kunne ikke forbinde til Totalkredit API. Prøv igen senere.",
+      "no_bonds": "Ingen obligationer fundet i API-svaret."
+    },
+    "error": {
+      "no_selection": "Vælg mindst én obligation."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Rediger obligationsvalg",
+        "description": "Tilføj eller fjern obligationer du ønsker at følge.",
+        "data": {
+          "selected_bonds": "Obligationer"
+        }
+      }
+    },
+    "abort": {
+      "cannot_connect": "Kunne ikke forbinde til Totalkredit API. Prøv igen senere."
+    },
+    "error": {
+      "no_selection": "Vælg mindst én obligation."
+    }
+  }
+}
