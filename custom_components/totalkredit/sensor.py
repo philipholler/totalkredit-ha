@@ -23,12 +23,48 @@ async def async_setup_entry(
         "selected_bonds", entry.data.get("selected_bonds", [])
     )
 
-    async_add_entities(
-        TotalkreditSensor(coordinator, bond)
-        for bond in (coordinator.data or [])
-        if bond.get("fondCode") in selected
-    )
+    entities = []
+    for bond in (coordinator.data or []):
+        if bond.get("fondCode") in selected:
+            entities.append(TotalkreditSensor(coordinator, bond))
+            entities.append(TotalkreditInterestSensor(coordinator, bond))
 
+    async_add_entities(entities)
+
+class TotalkreditInterestSensor(CoordinatorEntity, SensorEntity):
+    """Sensor for the effective interest rate of a Totalkredit bond."""
+
+    _attr_state_class = SensorStateClass.MEASUREMENT
+
+    def __init__(self, coordinator: TotalkreditCoordinator, bond: dict) -> None:
+        super().__init__(coordinator)
+        self._fond_code = bond["fondCode"]
+        self._attr_unique_id = f"totalkredit_interest_{self._fond_code}"
+        self._attr_name = f"Totalkredit Interest {bond['name']}"
+
+    def _get_bond(self) -> dict | None:
+        if not self.coordinator.data:
+            return None
+        return next(
+            (b for b in self.coordinator.data if b.get("fondCode") == self._fond_code),
+            None,
+        )
+
+    @property
+    def native_value(self) -> float | None:
+        """Return the effective interest rate as the sensor state."""
+        bond = self._get_bond()
+        if bond is None:
+            return None
+        rate_str = bond.get("effectiveRate")
+        if rate_str is None:
+            return None
+        try:
+            rate_addition_str = bond.get("interestMarginRate", "")
+            rate_addition = 0 if rate_addition_str == "" else float(rate_addition_str.replace(",", "."))
+            return float(str(rate_str).replace(",", ".")) + rate_addition
+        except ValueError:
+            return None
 
 class TotalkreditSensor(CoordinatorEntity, SensorEntity):
     """Sensor der repræsenterer én Totalkredit obligation."""
@@ -80,4 +116,5 @@ class TotalkreditSensor(CoordinatorEntity, SensorEntity):
             "aktuel_kurs": bond.get("spotPriceRatePayment"),
             "gruppe": bond.get("group"),
             "nasdaq_url": bond.get("nasdaqUrl"),
+            "rente_tillæg": bond.get("interestMarginRate")
         }

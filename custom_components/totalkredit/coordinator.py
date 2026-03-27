@@ -39,6 +39,7 @@ async def fetch_bonds_from_url(url: str) -> list[dict]:
             if group_name == "F-kort":
                 bond["name"] = "F-kort"
                 bond["effectiveRate"] = bond["expectedRate"]
+                bond["interestMarginRate"] = bond["interestMarginRate"].replace("%", "").replace(",", ".").strip()
                 bond.pop("expectedRate", None)
             # F3 or F5
             elif "fondCode" not in bond:
@@ -46,12 +47,10 @@ async def fetch_bonds_from_url(url: str) -> list[dict]:
                 bond["fondCode"] = bond["name"]
                 bond["effectiveRate"] = bond["innerInterestGrossValue"]
                 bond.pop("innerInterestGrossValue", None)
-                bond["spotPriceRatePayment"] = "100"
+                bond["priceRate"] = "100"
 
             rate = bond["effectiveRate"].replace("%", "").replace(",", ".").strip()
             bond["effectiveRate"] = f"{round(float(rate), 2):.2f}"
-
-
 
             bonds.append(bond)
     return bonds
