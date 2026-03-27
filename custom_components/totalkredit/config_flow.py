@@ -85,7 +85,7 @@ class TotalkreditOptionsFlow(config_entries.OptionsFlow):
             "selected_bonds",
             self._config_entry.data.get("selected_bonds", []),
         )
-        options = [{"value": b.get("fondCode"), "label": b["name"]} for b in bonds]
+        options = [{"value": b["fondCode"], "label": b["name"]} for b in bonds]
 
         return self.async_show_form(
             step_id="init",

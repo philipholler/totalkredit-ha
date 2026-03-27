@@ -105,7 +105,6 @@ class TotalkreditSensor(CoordinatorEntity, SensorEntity):
         bond = self._get_bond()
         if bond is None:
             return {}
-
         return {
             "navn": bond.get("name"),
             "løbetid": bond.get("lifetime"),
