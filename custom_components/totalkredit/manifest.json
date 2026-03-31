@@ -1,7 +1,7 @@
 {
   "domain": "totalkredit",
   "name": "Totalkredit",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "documentation": "https://github.com/philipholler/totalkredit-ha",
   "issue_tracker": "https://github.com/philipholler/totalkredit-ha/issues",
   "requirements": [],
