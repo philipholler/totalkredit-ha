@@ -1,4 +1,5 @@
 # Totalkredit Home Assistant Integration
+Bygger videre på integration fra [macsatcom](https://github.com/macsatcom/totalkredit-ha).
 
 Home Assistant integration der henter aktuelle obligationskurser fra [Totalkredit](https://www.totalkredit.dk) og eksponerer dem som sensor-entities.
 
@@ -6,7 +7,7 @@ Home Assistant integration der henter aktuelle obligationskurser fra [Totalkredi
 
 1. Åbn HACS i Home Assistant
 2. Gå til **Integrations** → menuikonet → **Custom repositories**
-3. Tilføj URL: `https://github.com/macsatcom/totalkredit-ha` med kategori **Integration**
+3. Tilføj URL: `https://github.com/philipholler/totalkredit-ha` med kategori **Integration**
 4. Find "Totalkredit" i HACS og installér
 5. Genstart Home Assistant
 
@@ -35,17 +36,18 @@ Du kan til enhver tid ændre dit obligationsvalg via **Konfigurer** på integrat
 
 **Attributter:**
 
-| Attribut | Beskrivelse |
-|----------|-------------|
-| `navn` | Obligationens navn |
-| `løbetid` | Lånets maksimale løbetid |
-| `fondskode` | Unik fondskode (Nasdaq Copenhagen) |
-| `åben_for_tilbud` | "Åben" eller "Lukket" |
-| `er_åben_for_tilbud` | `true` / `false` |
-| `effektiv_rente` | Effektiv rente inkl. kursfradrag |
-| `aktuel_kurs` | Aktuel spotpris ved udbetaling |
-| `gruppe` | Obligationsgruppe (f.eks. "Fast rente") |
-| `nasdaq_url` | Link til Nasdaq Copenhagen |
+| Attribut             | Beskrivelse                                                  |
+|----------------------|--------------------------------------------------------------|
+| `navn`               | Obligationens navn                                           |
+| `løbetid`            | Lånets maksimale løbetid                                     |
+| `fondskode`          | Unik fondskode (Nasdaq Copenhagen)                           |
+| `åben_for_tilbud`    | "Åben" eller "Lukket"                                        |
+| `er_åben_for_tilbud` | `true` / `false`                                             |
+| `effektiv_rente`     | Effektiv rente inkl. kursfradrag og rentetillæg (for f-kort) |
+| `aktuel_kurs`        | Aktuel spotpris ved udbetaling                               |
+| `gruppe`             | Obligationsgruppe (f.eks. "Fast rente")                      |
+| `nasdaq_url`         | Link til Nasdaq Copenhagen                                   |
+| `rente_tillæg`       | Rentetillæg til f-kort (unavailalbe for andre lånetyper)     |
 
 ## Opdatering
 

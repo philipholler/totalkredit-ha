@@ -1,12 +1,12 @@
 {
   "domain": "totalkredit",
   "name": "Totalkredit",
-  "version": "0.9.1",
-  "documentation": "https://github.com/macsatcom/totalkredit-ha",
-  "issue_tracker": "https://github.com/macsatcom/totalkredit-ha/issues",
+  "version": "0.10.0",
+  "documentation": "https://github.com/philipholler/totalkredit-ha",
+  "issue_tracker": "https://github.com/philipholler/totalkredit-ha/issues",
   "requirements": [],
   "dependencies": [],
-  "codeowners": ["@macsatcom"],
+  "codeowners": ["@philipholler"],
   "iot_class": "cloud_polling",
   "config_flow": true
 }
